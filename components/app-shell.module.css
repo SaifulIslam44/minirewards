@@ -1,0 +1,186 @@
+.app {
+  /* ☀️ Light Theme Variables (আপনার অরিজিনাল কালার) */
+  --color-bg: #faf6ec;
+  --color-surface: #ffffff;
+  --color-primary: #356e3d;
+  --color-primary-dark: #285530;
+  --color-accent: #fbcc5c;
+  --color-text: #1c1c17;
+  --color-muted: #74746a;
+  --color-border: #ece6d6;
+  --radius: 16px;
+
+  min-height: 100dvh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease; /* স্মুথ ট্রানজিশন */
+}
+
+/* 🌙 Dark Theme Variables (next-themes ট্রিগার করলে কাজ করবে) */
+:global(.dark) .app {
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-primary: #10b981; /* Celo Green for dark mode */
+  --color-primary-dark: #059669;
+  --color-accent: #f59e0b;
+  --color-text: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-border: #334155;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-bg);
+  z-index: 10;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-dark);
+}
+
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wallet {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.wallet:hover {
+  background-color: var(--color-border);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+/* 🌓 থিম টগল বাটন */
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 30px; 
+  height: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.themeToggle:hover {
+  background-color: var(--color-border);
+  transform: scale(1.05);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 16px 120px;
+}
+
+.gate {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 40px 24px;
+}
+
+.gateIcon {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background-color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-dark);
+}
+
+.gateTitle {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.gateText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-muted);
+  max-width: 300px;
+}
+
+.connectBtn {
+  margin-top: 8px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.connectBtn:active {
+  background-color: var(--color-primary-dark);
+}
+
+.connectBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

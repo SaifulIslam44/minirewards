@@ -1,0 +1,317 @@
+/* 🎛️ Main Wrapper */
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 0.5rem 0;
+}
+
+/* 🏆 Premium Reward Card */
+.premiumRewardCard {
+  background: linear-gradient(145deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.05) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.05);
+}
+
+.rewardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Light Mode Defaults for Reward Card */
+.goldIcon { color: #d97706; }
+.rewardTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #b45309;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.rewardDescription {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #334155; /* Light Mode Text */
+  margin: 0;
+}
+.rewardDescription strong {
+  color: #b45309;
+  font-weight: 700;
+}
+
+/* 🌙 Dark Mode Overrides for Reward Card */
+:global(.dark) .goldIcon { color: #fbbf24; }
+:global(.dark) .rewardTitle { color: #fbbf24; }
+:global(.dark) .rewardDescription { color: #cbd5e1; /* Clear visibility in Dark Mode */ }
+:global(.dark) .rewardDescription strong { color: #f59e0b; }
+
+
+/* 🌟 Hero Section (Total Points) */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff; /* Light Mode Bg */
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+.heroLabel {
+  font-size: 0.75rem;
+  color: #64748b; /* Light Mode Label */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+.heroPoints {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0f172a; /* Light Mode Text */
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  line-height: 1;
+}
+
+.heroUnit {
+  font-size: 1rem;
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* 🌙 Dark Mode Overrides for Hero */
+:global(.dark) .hero {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+}
+:global(.dark) .heroLabel { color: #94a3b8; }
+:global(.dark) .heroPoints { color: #ffffff; }
+
+
+/* 📊 Stats Grid */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff; /* Light Mode Bg */
+  border: 1px solid #e2e8f0;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  background: #f8fafc;
+}
+
+.statValue {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0f172a; /* Light Mode Text */
+  margin-bottom: 0.1rem;
+}
+
+.statLabel {
+  font-size: 0.65rem;
+  color: #64748b; /* Light Mode Label */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* 🌙 Dark Mode Overrides for Stats */
+:global(.dark) .statCard {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+}
+:global(.dark) .statCard:hover { background: #25334a; }
+:global(.dark) .statValue { color: #ffffff; }
+:global(.dark) .statLabel { color: #94a3b8; }
+
+
+/* ⚡ Action Button (Remains constant as it uses Accent Colors) */
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.25);
+}
+
+.actionBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+}
+
+.actionBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.actionBtn:disabled {
+  background: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+:global(.dark) .actionBtn:disabled {
+  background: #334155;
+  color: #64748b;
+}
+
+/* ❌ Error Note */
+.note {
+  color: #ef4444;
+  font-size: 0.85rem;
+  text-align: center;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.8rem;
+  border-radius: 10px;
+  width: 100%;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   Premium Popup Modal CSS
+   ========================================= */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalContent {
+  background: linear-gradient(145deg, #1e1e24, #121215);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 16px;
+  padding: 30px 24px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.05);
+  animation: modalPop 0.3s ease-out forwards;
+}
+
+@keyframes modalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalIconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.alertIcon {
+  color: #ffcc00;
+  filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.5));
+}
+
+.modalTitle {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  letter-spacing: 0.5px;
+}
+
+.modalText {
+  color: #a0a0ab;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+.modalText strong {
+  color: #ffcc00;
+}
+
+.modalOkBtn {
+  background: linear-gradient(90deg, #ffcc00, #ffaa00);
+  color: #121215;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(255, 170, 0, 0.3);
+}
+
+.modalOkBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 170, 0, 0.4);
+}
+
+.modalOkBtn:active {
+  transform: translateY(1px);
+}
