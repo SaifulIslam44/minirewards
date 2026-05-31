@@ -75,6 +75,9 @@ export const metadata: Metadata = {
   title: 'MiniRewards — Earn Rewards',
   description: 'Earn points for daily on-chain actions on Celo, with an AI assistant. MiniPay User Only.',
   manifest: "/manifest.json",
+  other: {
+    "talentapp:project_verification": "698004e41c49b7e9446d3d4593a16812c8fec3cb927b24480f58bb8de31c21473c982f54ded108be5cdaf5336b29209c8a83c0730ec48aec6ecc060e51ef3623"
+  }
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
