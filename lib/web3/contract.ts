@@ -17,158 +17,300 @@ export const ACTIVE_CHAIN =
  * facet, we interact with the Diamond ADDRESS using the FACET's ABI.
  */
 export const REWARDS_ABI = [
-  // --- events ---
   {
-    type: "event",
-    name: "ActionExecuted",
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "user", type: "address" },
-      { indexed: false, internalType: "uint256", name: "count", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "pointsAwarded", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "totalPoints", type: "uint256" },
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "count",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "pointsAwarded",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalPoints",
+        "type": "uint256"
+      }
     ],
+    "name": "ActionExecuted",
+    "type": "event"
   },
   {
-    type: "event",
-    name: "DailyTxLimitUpdated",
-    anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint256", name: "newLimit", type: "uint256" }],
-  },
-  {
-    type: "event",
-    name: "PointsPerTxUpdated",
-    anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint256", name: "newPoints", type: "uint256" }],
-  },
-  {
-    type: "event",
-    name: "ResetOffsetUpdated",
-    anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint256", name: "newOffset", type: "uint256" }],
-  },
-  {
-    type: "event",
-    name: "RewardsInitialized",
-    anonymous: false,
-    inputs: [{ indexed: true, internalType: "address", name: "admin", type: "address" }],
-  },
-  {
-    type: "event",
-    name: "TimeWindowUpdated",
-    anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint256", name: "newDuration", type: "uint256" }],
-  },
-
-  // --- writes ---
-  {
-    type: "function",
-    name: "batchExecuteAction",
-    stateMutability: "nonpayable",
-    inputs: [{ internalType: "uint8", name: "count", type: "uint8" }],
-    outputs: [],
-  },
-  {
-    type: "function",
-    name: "executeAction",
-    stateMutability: "nonpayable",
-    inputs: [],
-    outputs: [],
-  },
-  {
-    type: "function",
-    name: "initRewards",
-    stateMutability: "nonpayable",
-    inputs: [{ internalType: "address", name: "_admin", type: "address" }],
-    outputs: [],
-  },
-  {
-    type: "function",
-    name: "setDailyTxLimit",
-    stateMutability: "nonpayable",
-    inputs: [{ internalType: "uint256", name: "limit", type: "uint256" }],
-    outputs: [],
-  },
-  {
-    type: "function",
-    name: "setPointsPerTx",
-    stateMutability: "nonpayable",
-    inputs: [{ internalType: "uint256", name: "points", type: "uint256" }],
-    outputs: [],
-  },
-  {
-    type: "function",
-    name: "setResetOffset",
-    stateMutability: "nonpayable",
-    inputs: [{ internalType: "uint256", name: "offsetInSeconds", type: "uint256" }],
-    outputs: [],
-  },
-  {
-    type: "function",
-    name: "setTimeWindowDuration",
-    stateMutability: "nonpayable",
-    inputs: [{ internalType: "uint256", name: "durationInSeconds", type: "uint256" }],
-    outputs: [],
-  },
-
-  // --- views ---
-  {
-    type: "function",
-    name: "admin",
-    stateMutability: "view",
-    inputs: [],
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-  },
-  {
-    type: "function",
-    name: "dailyTxLimit",
-    stateMutability: "view",
-    inputs: [],
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-  },
-  {
-    type: "function",
-    name: "getLeaderboard",
-    stateMutability: "view",
-    inputs: [],
-    outputs: [
-      { internalType: "address[]", name: "addresses", type: "address[]" },
-      { internalType: "uint256[]", name: "points", type: "uint256[]" },
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newLimit",
+        "type": "uint256"
+      }
     ],
+    "name": "DailyTxLimitUpdated",
+    "type": "event"
   },
   {
-    type: "function",
-    name: "getRemainingDailyTx",
-    stateMutability: "view",
-    inputs: [{ internalType: "address", name: "user", type: "address" }],
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newPoints",
+        "type": "uint256"
+      }
+    ],
+    "name": "PointsPerTxUpdated",
+    "type": "event"
   },
   {
-    type: "function",
-    name: "getUserPoints",
-    stateMutability: "view",
-    inputs: [{ internalType: "address", name: "user", type: "address" }],
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newOffset",
+        "type": "uint256"
+      }
+    ],
+    "name": "ResetOffsetUpdated",
+    "type": "event"
   },
   {
-    type: "function",
-    name: "pointsPerTx",
-    stateMutability: "view",
-    inputs: [],
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "admin",
+        "type": "address"
+      }
+    ],
+    "name": "RewardsInitialized",
+    "type": "event"
   },
   {
-    type: "function",
-    name: "resetOffset",
-    stateMutability: "view",
-    inputs: [],
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newDuration",
+        "type": "uint256"
+      }
+    ],
+    "name": "TimeWindowUpdated",
+    "type": "event"
   },
   {
-    type: "function",
-    name: "timeWindowDuration",
-    stateMutability: "view",
-    inputs: [],
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    "inputs": [],
+    "name": "admin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "count",
+        "type": "uint8"
+      }
+    ],
+    "name": "batchExecuteAction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "dailyTxLimit",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "executeAction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getLeaderboard",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "addresses",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "points",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getRemainingDailyTx",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserPoints",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "initRewards",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pointsPerTx",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "resetOffset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "limit",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDailyTxLimit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "points",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPointsPerTx",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "offsetInSeconds",
+        "type": "uint256"
+      }
+    ],
+    "name": "setResetOffset",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "durationInSeconds",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTimeWindowDuration",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "timeWindowDuration",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
 ] as const;

@@ -1,7 +1,13 @@
+
+
+
+
 // "use client"
 
+// import { useState, useEffect } from "react"
 // import { useAccount, useConnect, useDisconnect } from "wagmi"
-// import { Gem, Wallet } from "lucide-react"
+// import { Gem, Wallet, Moon, Sun } from "lucide-react"
+// import { useTheme } from "next-themes" 
 // import { Providers } from "@/app/providers"
 // import { Dashboard } from "@/components/dashboard"
 // import { Leaderboard } from "@/components/leaderboard"
@@ -20,6 +26,13 @@
 //   const { disconnect } = useDisconnect()
 //   const data = useRewardsData()
 
+//   // 🌓 থিম কন্ট্রোল
+//   const { theme, setTheme, resolvedTheme } = useTheme()
+//   const [mounted, setMounted] = useState(false)
+
+//   useEffect(() => setMounted(true), [])
+//   const currentTheme = theme === "system" ? resolvedTheme : theme
+
 //   const injected = connectors.find((c) => c.type === "injected")
 
 //   return (
@@ -31,12 +44,29 @@
 //           </span>
 //           MiniRewards
 //         </div>
-//         {isConnected ? (
-//           <button className={styles.wallet} onClick={() => disconnect()}>
-//             <span className={styles.dot} />
-//             {shorten(address)}
+        
+//         {/* 🌟 ডান পাশের অ্যাকশন এরিয়া */}
+//         <div className={styles.headerActions}>
+//           {isConnected ? (
+//             <button className={styles.wallet} onClick={() => disconnect()}>
+//               <span className={styles.dot} />
+//               {shorten(address)}
+//             </button>
+//           ) : null}
+
+//           {/* 🌓 থিম টগল বাটন */}
+//           <button 
+//             className={styles.themeToggle} 
+//             onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+//             aria-label="Toggle Theme"
+//           >
+//             {mounted ? (
+//               currentTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />
+//             ) : (
+//               <div style={{ width: 18, height: 18 }} />
+//             )}
 //           </button>
-//         ) : null}
+//         </div>
 //       </header>
 
 //       {isConnected ? (
@@ -94,17 +124,20 @@
 
 
 
+
 "use client"
 
 import { useState, useEffect } from "react"
 import { useAccount, useConnect, useDisconnect } from "wagmi"
 import { Gem, Wallet, Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes" // 🌟 next-themes ইম্পোর্ট
+import { useTheme } from "next-themes" 
 import { Providers } from "@/app/providers"
 import { Dashboard } from "@/components/dashboard"
 import { Leaderboard } from "@/components/leaderboard"
 import { AiChat } from "@/components/ai-chat"
+import { BottomNav } from "@/components/bottom-nav" 
 import { useRewardsData } from "@/lib/web3/use-rewards"
+import Image from "next/image" 
 import styles from "./app-shell.module.css"
 
 function shorten(addr?: string) {
@@ -121,6 +154,9 @@ function AppContent() {
   // 🌓 থিম কন্ট্রোল
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  
+  // 🔘 ট্যাব কন্ট্রোল (ডিফল্টভাবে ড্যাশবোর্ড ওপেন থাকবে)
+  const [activeTab, setActiveTab] = useState<"dashboard" | "leaderboard">("dashboard")
 
   useEffect(() => setMounted(true), [])
   const currentTheme = theme === "system" ? resolvedTheme : theme
@@ -131,13 +167,21 @@ function AppContent() {
     <div className={styles.app}>
       <header className={styles.header}>
         <div className={styles.brand}>
-          <span className={styles.logo}>
-            <Gem size={18} />
+          {/* <span className={styles.logo}> */}
+          <span>
+            {/* <Gem size={18} /> */}
+            <Image 
+              src="/logo.png" 
+              alt="App Logo" 
+              width={30} 
+              height={30} 
+              className={styles.appLogo}
+              />
           </span>
           MiniRewards
         </div>
         
-        {/* 🌟 ডান পাশের অ্যাকশন এরিয়া */}
+       
         <div className={styles.headerActions}>
           {isConnected ? (
             <button className={styles.wallet} onClick={() => disconnect()}>
@@ -146,7 +190,7 @@ function AppContent() {
             </button>
           ) : null}
 
-          {/* 🌓 থিম টগল বাটন */}
+          
           <button 
             className={styles.themeToggle} 
             onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
@@ -162,9 +206,15 @@ function AppContent() {
       </header>
 
       {isConnected ? (
-        <main className={styles.main}>
-          <Dashboard data={data} />
-          <Leaderboard entries={data.leaderboard} self={address} />
+       
+        <main className={styles.main} style={{ paddingBottom: "80px" }}>
+          
+          {activeTab === "dashboard" ? (
+            <Dashboard data={data} />
+          ) : (
+            <Leaderboard entries={data.leaderboard} self={address} />
+          )}
+
         </main>
       ) : (
         <div className={styles.gate}>
@@ -187,6 +237,11 @@ function AppContent() {
       )}
 
       {isConnected ? <AiChat data={data} /> : null}
+
+ 
+      {isConnected ? (
+        <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
+      ) : null}
     </div>
   )
 }

@@ -1,6 +1,10 @@
+/* =========================================
+   AI Chat Floating Button & Panel CSS
+   ========================================= */
+
 .fab {
   position: fixed;
-  bottom: 20px;
+  bottom: 90px;
   right: calc(50% - 240px + 16px);
   width: 56px;
   height: 56px;
@@ -14,19 +18,33 @@
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(40, 85, 48, 0.35);
   z-index: 40;
+  opacity: 0.75; 
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+
+.fab:hover, .fab:active {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 @media (max-width: 512px) {
   .fab {
     right: 16px;
+    bottom: 90px;
+    width: 48px; 
+    height: 48px;
   }
 }
+
+
 
 .overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(28, 28, 23, 0.45);
-  z-index: 50;
+  z-index: 1050;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -187,9 +205,6 @@
   cursor: not-allowed;
 }
 
-
-
-
 .thinkingContainer {
   display: flex;
   justify-content: flex-start;
@@ -250,4 +265,112 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* =========================================
+   Premium Popup Modal CSS
+   ========================================= */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalContent {
+  background: linear-gradient(145deg, #1e1e24, #121215);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 16px;
+  padding: 30px 24px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.05);
+  animation: modalPop 0.3s ease-out forwards;
+}
+
+@keyframes modalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalIconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.alertIcon {
+  color: #ffcc00;
+  filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.5));
+}
+
+.modalTitle {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  letter-spacing: 0.5px;
+}
+
+.modalText {
+  color: #a0a0ab;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+.modalText strong {
+  color: #ffcc00;
+}
+
+.modalOkBtn {
+  background: linear-gradient(90deg, #ffcc00, #ffaa00);
+  color: #121215;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(255, 170, 0, 0.3);
+}
+
+.modalOkBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 170, 0, 0.4);
+}
+
+.modalOkBtn:active {
+  transform: translateY(1px);
+}
+
+
+
+.appLogo {
+  border-radius: 100%;
+  object-fit: cover;
+  display: block; 
+  transition: background-color 0.3s ease;
+}
+
+:global(.dark) .appLogo {
+  background-color: #ffffff;
+  padding: 1px; 
 }

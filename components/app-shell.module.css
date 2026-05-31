@@ -1,5 +1,5 @@
 .app {
-  /* ☀️ Light Theme Variables (আপনার অরিজিনাল কালার) */
+  
   --color-bg: #faf6ec;
   --color-surface: #ffffff;
   --color-primary: #356e3d;
@@ -19,14 +19,14 @@
   margin: 0 auto;
   position: relative;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease; /* স্মুথ ট্রানজিশন */
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
-/* 🌙 Dark Theme Variables (next-themes ট্রিগার করলে কাজ করবে) */
+
 :global(.dark) .app {
   --color-bg: #0f172a;
   --color-surface: #1e293b;
-  --color-primary: #10b981; /* Celo Green for dark mode */
+  --color-primary: #10b981; 
   --color-primary-dark: #059669;
   --color-accent: #f59e0b;
   --color-text: #f8fafc;
@@ -183,4 +183,16 @@
 .connectBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.appLogo {
+  border-radius: 100%;
+  object-fit: cover;
+  display: block; 
+  transition: background-color 0.3s ease;
+}
+
+:global(.dark) .appLogo {
+  background-color: #ffffff;
+  padding: 1px; 
 }

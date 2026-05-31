@@ -1,0 +1,46 @@
+.navContainer {
+  position: fixed;
+  bottom: 0;
+  left: 50%; /* স্ক্রিনের মাঝখানে আনার জন্য */
+  transform: translateX(-50%); /* একদম পারফেক্ট সেন্টারে রাখার জন্য */
+  width: 100%;
+  max-width: 480px; /* আপনার অ্যাপের (app-shell) সাইজের সমান */
+  height: 70px;
+  background: var(--color-surface, rgba(18, 18, 21, 0.95)); /* থিমের সাথে মানানসই */
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.navItem {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 500;
+  gap: 6px;
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.navItem:hover {
+  color: #a0a0ab;
+}
+
+.navItem.active {
+  color: #ffcc00;
+}
+
+.navItem.active svg {
+  filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5));
+}
