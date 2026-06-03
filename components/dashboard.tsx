@@ -64,14 +64,21 @@ export function Dashboard({ data }: { data: RewardsData }) {
   }, [isConfirmed, isTxError])
 
  
-  useEffect(() => {
+useEffect(() => {
     if (remaining > 0) return;
 
     const updateTimer = () => {
       const now = new Date();
    
-      const nextMidnight = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1));
-      const diff = nextMidnight.getTime() - now.getTime();
+      
+      let nextReset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 6, 0, 0));
+
+      
+      if (now.getTime() >= nextReset.getTime()) {
+        nextReset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 6, 0, 0));
+      }
+
+      const diff = nextReset.getTime() - now.getTime();
 
       if (diff <= 0) {
         setTimeLeft("00h 00m 00s");
