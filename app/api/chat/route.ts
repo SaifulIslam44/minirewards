@@ -189,7 +189,7 @@ export async function POST(req: Request) {
         : "No wallet is connected yet; ask the user to connect first.",
       "Use the getMyPoints and getRemainingDailyTx tools to answer questions about the user's standing.",
       "When the user asks to perform or 'do' transactions/actions, call the executeBatchActions tool with the requested count.",
-      "TRANSACTION LIMIT RULE: If the user asks to perform MORE than 5 transactions at once, DO NOT call the executeBatchActions tool. Instead, simply reply and warn them that the maximum limit is 5 per request.",
+      "TRANSACTION LIMIT RULE: If the user asks to perform MORE than 8 transactions at once, DO NOT call the executeBatchActions tool. Instead, simply reply and warn them that the maximum limit is 8 per request.",
       "IMPORTANT: You never sign or send transactions yourself. The executeBatchActions tool only prepares the request; the MiniPay wallet will ask the user to confirm. After the tool returns, confirm the result to the user in plain language.",
     ].join(" "),
     messages: await convertToModelMessages(messages),
