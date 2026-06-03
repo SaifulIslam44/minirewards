@@ -7,5 +7,5 @@ import { ACTIVE_CHAIN } from "./contract"
  */
 export const publicClient = createPublicClient({
   chain: ACTIVE_CHAIN,
-  transport: http(),
+  transport: http(process.env.NEXT_PUBLIC_CELO_RPC_URL),
 })

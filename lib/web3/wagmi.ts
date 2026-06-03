@@ -13,7 +13,7 @@ export const wagmiConfig = createConfig({
   chains: [celo, celoAlfajores],
   connectors: [injected({ shimDisconnect: true })],
   transports: {
-    [celo.id]: http(),
+    [celo.id]: http(process.env.NEXT_PUBLIC_CELO_RPC_URL),
     [celoAlfajores.id]: http(),
   },
   ssr: true,

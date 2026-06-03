@@ -7,7 +7,7 @@ const nextConfig = {
     unoptimized: true,
   },
   allowedDevOrigins: [
-    "boots-beautiful-marker-tucson.trycloudflare.com"
+    "ian-combine-especially-bestsellers.trycloudflare.com"
   ],
 }
 

@@ -1,19 +1,21 @@
 .navContainer {
   position: fixed;
-  bottom: 0;
-  left: 50%; /* স্ক্রিনের মাঝখানে আনার জন্য */
-  transform: translateX(-50%); /* একদম পারফেক্ট সেন্টারে রাখার জন্য */
-  width: 100%;
-  max-width: 480px; /* আপনার অ্যাপের (app-shell) সাইজের সমান */
+  bottom: 0 !important;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100% !important;
+  max-width: 480px;
   height: 70px;
-  background: var(--color-surface, rgba(18, 18, 21, 0.95)); /* থিমের সাথে মানানসই */
-  backdrop-filter: blur(10px);
-  border-top: 1px solid var(--color-border);
+  padding-bottom: 0px;
+  margin: 0 !important;
+  background: var(--color-surface);
+  border: none !important; /* আগের কোনো বর্ডার থাকলে মুছে দেবে */
+  border-top: 1px solid var(--color-border) !important;
+  border-radius: 0px !important; /* যেকোনো বাঁকানো কোণাকে ১০০% চারকোনা করবে */
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 1000;
-  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 9999;
 }
 
 .navItem {
@@ -24,23 +26,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #6b7280;
+  color: var(--color-muted);
   font-size: 0.75rem;
   font-weight: 500;
   gap: 6px;
-  transition: all 0.3s ease;
-  width: 100%;
+  flex: 1;
   height: 100%;
+  transition: all 0.3s ease;
+  border-radius: 0px !important;
 }
 
 .navItem:hover {
-  color: #a0a0ab;
+  color: var(--color-text);
 }
 
 .navItem.active {
-  color: #ffcc00;
+  color: var(--color-accent);
 }
 
 .navItem.active svg {
-  filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5));
+  filter: drop-shadow(0 0 5px rgba(251, 204, 92, 0.5));
 }

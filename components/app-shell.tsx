@@ -207,7 +207,8 @@ function AppContent() {
 
       {isConnected ? (
        
-        <main className={styles.main} style={{ paddingBottom: "80px" }}>
+        // <main className={styles.main} style={{ paddingBottom: "80px" }}>
+        <main className={styles.main}>
           
           {activeTab === "dashboard" ? (
             <Dashboard data={data} />
