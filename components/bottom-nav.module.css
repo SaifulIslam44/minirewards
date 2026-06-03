@@ -9,9 +9,9 @@
   padding-bottom: 0px;
   margin: 0 !important;
   background: var(--color-surface);
-  border: none !important; /* আগের কোনো বর্ডার থাকলে মুছে দেবে */
+  border: none !important; 
   border-top: 1px solid var(--color-border) !important;
-  border-radius: 0px !important; /* যেকোনো বাঁকানো কোণাকে ১০০% চারকোনা করবে */
+  border-radius: 0px !important; 
   display: flex;
   justify-content: space-around;
   align-items: center;
