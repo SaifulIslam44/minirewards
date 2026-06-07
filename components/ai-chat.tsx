@@ -1,15 +1,19 @@
 
 
 
+
+
+
 // "use client"
 
 // import { useEffect, useRef, useState } from "react"
 // import { useChat } from "@ai-sdk/react"
 // import { DefaultChatTransport, lastAssistantMessageIsCompleteWithToolCalls } from "ai"
-// import { Bot, Send, Sparkles, X, Loader2 } from "lucide-react"
+// import { Bot, Send, Sparkles, X, Loader2, AlertCircle } from "lucide-react" 
 // import type { useRewardsData } from "@/lib/web3/use-rewards"
 // import { useRewardsActions } from "@/lib/web3/use-rewards"
 // import styles from "./ai-chat.module.css"
+// import Image from "next/image" 
 
 // type RewardsData = ReturnType<typeof useRewardsData>
 
@@ -19,9 +23,20 @@
 //   "Do 3 transactions for me",
 // ]
 
+
+// const isMiniPay = () => {
+//   return (
+//     typeof window !== "undefined" && 
+//     (window as any).ethereum && 
+//     (window as any).ethereum.isMiniPay === true
+//   );
+// };
+
 // export function AiChat({ data }: { data: RewardsData }) {
 //   const [open, setOpen] = useState(false)
 //   const [input, setInput] = useState("")
+//   const [showPopup, setShowPopup] = useState(false) 
+  
 //   const { batchExecuteAction } = useRewardsActions()
 //   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -35,8 +50,25 @@
 //     sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
 //     onToolCall: ({ toolCall }) => {
 //       if (toolCall.dynamic) return
+      
 //       if (toolCall.toolName === "executeBatchActions") {
 //         const { count } = toolCall.input as { count: number }
+        
+        
+//         if (!isMiniPay()) {
+//           setShowPopup(true); 
+          
+//           addToolOutput({
+//             tool: "executeBatchActions",
+//             toolCallId: toolCall.toolCallId,
+//             output: {
+//               status: "rejected",
+//               error: "MiniPay wallet is required to perform this action.",
+//             },
+//           });
+//           return;
+//         }
+
 //         ;(async () => {
 //           try {
 //             const hash = await batchExecuteAction(count)
@@ -74,8 +106,18 @@
 
 //   return (
 //     <>
-//       <button className={styles.fab} onClick={() => setOpen(true)} aria-label="Open AI assistant">
+//       {/* <button className={styles.fab} onClick={() => setOpen(true)} aria-label="Open AI assistant">
 //         <Sparkles size={24} />
+//       </button> */}
+
+//       <button className={styles.fab} onClick={() => setOpen(true)} aria-label="Open AI assistant">
+//         <Image 
+//           src="/logo.png" 
+//           alt="AI Assistant Logo" 
+//           width={60} 
+//           height={60} 
+//           className={styles.appLogo}
+//         />
 //       </button>
 
 //       {open ? (
@@ -83,7 +125,14 @@
 //           <div className={styles.panel} onClick={(e) => e.stopPropagation()}>
 //             <div className={styles.panelHeader}>
 //               <span className={styles.panelTitle}>
-//                 <Bot size={18} />
+//                 {/* <Bot size={18} /> */}
+//                 <Image 
+//                   src="/logo1.png" 
+//                   alt="App Logo" 
+//                   width={20} 
+//                   height={20} 
+//                   className={styles.appLogo}
+//                 />
 //                 Rewards Assistant
 //               </span>
 //               <button className={styles.closeBtn} onClick={() => setOpen(false)} aria-label="Close">
@@ -151,6 +200,24 @@
 //           </div>
 //         </div>
 //       ) : null}
+
+    
+//       {showPopup && (
+//         <div className={styles.modalOverlay}>
+//           <div className={styles.modalContent}>
+//             <div className={styles.modalIconContainer}>
+//               <AlertCircle size={40} className={styles.alertIcon} />
+//             </div>
+//             <h3 className={styles.modalTitle}>MiniPay Required</h3>
+//             <p className={styles.modalText}>
+//               Please open this dApp inside the <strong>Opera MiniPay</strong> wallet application to execute transactions and earn points!
+//             </p>
+//             <button className={styles.modalOkBtn} onClick={() => setShowPopup(false)}>
+//               OK, Got it!
+//             </button>
+//           </div>
+//         </div>
+//       )}
 //     </>
 //   )
 // }
@@ -174,10 +241,13 @@
 //           let label = "Preparing transaction…"
 //           if (part.state === "input-available") label = "Waiting for wallet confirmation…"
 //           if (part.state === "output-available") {
-//             const out = part.output as { status?: string; count?: number }
+//             const out = part.output as { status?: string; count?: number; error?: string }
+            
 //             label =
 //               out?.status === "confirmed"
 //                 ? `Confirmed ${out.count} action(s) on-chain`
+//                 : out?.error === "MiniPay wallet is required to perform this action."
+//                 ? "Transaction blocked (Requires MiniPay)"
 //                 : "Transaction was not completed"
 //           }
 //           return (
@@ -223,14 +293,27 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client"
 
 import { useEffect, useRef, useState } from "react"
 import { useChat } from "@ai-sdk/react"
 import { DefaultChatTransport, lastAssistantMessageIsCompleteWithToolCalls } from "ai"
-import { Bot, Send, Sparkles, X, Loader2, AlertCircle } from "lucide-react" 
+import { Send, Sparkles, X, Loader2, AlertCircle } from "lucide-react" 
 import type { useRewardsData } from "@/lib/web3/use-rewards"
-import { useRewardsActions } from "@/lib/web3/use-rewards"
 import styles from "./ai-chat.module.css"
 import Image from "next/image" 
 
@@ -241,7 +324,6 @@ const SUGGESTIONS = [
   "How many actions can I still do today?",
   "Do 3 transactions for me",
 ]
-
 
 const isMiniPay = () => {
   return (
@@ -256,10 +338,9 @@ export function AiChat({ data }: { data: RewardsData }) {
   const [input, setInput] = useState("")
   const [showPopup, setShowPopup] = useState(false) 
   
-  const { batchExecuteAction } = useRewardsActions()
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const { messages, sendMessage, status, addToolOutput } = useChat({
+  const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/chat",
       prepareSendMessagesRequest: ({ messages }) => ({
@@ -268,46 +349,11 @@ export function AiChat({ data }: { data: RewardsData }) {
     }),
     sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithToolCalls,
     onToolCall: ({ toolCall }) => {
-      if (toolCall.dynamic) return
       
       if (toolCall.toolName === "executeBatchActions") {
-        const { count } = toolCall.input as { count: number }
-        
-        
-        if (!isMiniPay()) {
-          setShowPopup(true); 
-          
-          addToolOutput({
-            tool: "executeBatchActions",
-            toolCallId: toolCall.toolCallId,
-            output: {
-              status: "rejected",
-              error: "MiniPay wallet is required to perform this action.",
-            },
-          });
-          return;
-        }
-
-        ;(async () => {
-          try {
-            const hash = await batchExecuteAction(count)
-            data.refetch()
-            addToolOutput({
-              tool: "executeBatchActions",
-              toolCallId: toolCall.toolCallId,
-              output: { status: "confirmed", count, txHash: hash },
-            })
-          } catch (e: any) {
-            addToolOutput({
-              tool: "executeBatchActions",
-              toolCallId: toolCall.toolCallId,
-              output: {
-                status: "rejected",
-                error: e?.shortMessage ?? e?.message ?? "User rejected the transaction.",
-              },
-            })
-          }
-        })()
+        setTimeout(() => {
+          data.refetch()
+        }, 4000) 
       }
     },
   })
@@ -317,6 +363,11 @@ export function AiChat({ data }: { data: RewardsData }) {
   }, [messages])
 
   function submit(text: string) {
+    // মেসেজ সেন্ড করার আগেই চেক করবে ইউজার MiniPay তে আছে কি না
+    if (!isMiniPay()) {
+      setShowPopup(true);
+      return;
+    }
     const value = text.trim()
     if (!value) return
     sendMessage({ text: value })
@@ -325,10 +376,6 @@ export function AiChat({ data }: { data: RewardsData }) {
 
   return (
     <>
-      {/* <button className={styles.fab} onClick={() => setOpen(true)} aria-label="Open AI assistant">
-        <Sparkles size={24} />
-      </button> */}
-
       <button className={styles.fab} onClick={() => setOpen(true)} aria-label="Open AI assistant">
         <Image 
           src="/logo.png" 
@@ -344,7 +391,6 @@ export function AiChat({ data }: { data: RewardsData }) {
           <div className={styles.panel} onClick={(e) => e.stopPropagation()}>
             <div className={styles.panelHeader}>
               <span className={styles.panelTitle}>
-                {/* <Bot size={18} /> */}
                 <Image 
                   src="/logo1.png" 
                   alt="App Logo" 
@@ -420,7 +466,6 @@ export function AiChat({ data }: { data: RewardsData }) {
         </div>
       ) : null}
 
-    
       {showPopup && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContent}>
@@ -457,17 +502,14 @@ function MessageView({ message }: { message: any }) {
         }
 
         if (part.type === "tool-executeBatchActions") {
-          let label = "Preparing transaction…"
-          if (part.state === "input-available") label = "Waiting for wallet confirmation…"
+          let label = "Processing transaction silently..."
           if (part.state === "output-available") {
             const out = part.output as { status?: string; count?: number; error?: string }
             
             label =
-              out?.status === "confirmed"
-                ? `Confirmed ${out.count} action(s) on-chain`
-                : out?.error === "MiniPay wallet is required to perform this action."
-                ? "Transaction blocked (Requires MiniPay)"
-                : "Transaction was not completed"
+              out?.status === "success"
+                ? `Successfully completed ${out.count} action(s)`
+                : `Failed: ${out?.error || "Transaction error"}`
           }
           return (
             <div key={i} className={styles.tool}>
